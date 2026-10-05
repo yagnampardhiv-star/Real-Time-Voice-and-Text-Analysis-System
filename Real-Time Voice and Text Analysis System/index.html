@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real-Time Voice & Text Analysis</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">◉</span>
+            Voice<span>Text</span> AI
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#analyzer">Analyzer</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </div>
+
+        <button class="nav-btn" onclick="scrollToAnalyzer()">
+            Start Analysis
+        </button>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ● REAL-TIME AI ANALYSIS
+            </div>
+
+            <h1>
+                Understand Your
+                <span>Voice & Words</span>
+            </h1>
+
+            <p>
+                A smart voice and text analysis platform that converts
+                your speech into text and analyzes sentiment, keywords,
+                and communication patterns instantly.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary-btn" onclick="scrollToAnalyzer()">
+                    🎤 Start Analyzing
+                </button>
+
+                <button class="secondary-btn" onclick="document.getElementById('features').scrollIntoView()">
+                    Explore Features →
+                </button>
+
+            </div>
+
+            <div class="hero-stats">
+
+                <div>
+                    <strong>Real-Time</strong>
+                    <span>Analysis</span>
+                </div>
+
+                <div>
+                    <strong>Voice</strong>
+                    <span>Recognition</span>
+                </div>
+
+                <div>
+                    <strong>Smart</strong>
+                    <span>Insights</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Hero visual -->
+        <div class="hero-visual">
+
+            <div class="orb orb-one"></div>
+            <div class="orb orb-two"></div>
+
+            <div class="voice-card">
+
+                <div class="voice-header">
+                    <span>Live Voice Analysis</span>
+                    <span class="live">
+                        <i></i> LIVE
+                    </span>
+                </div>
+
+                <div class="wave-container">
+
+                    <div class="wave w1"></div>
+                    <div class="wave w2"></div>
+                    <div class="wave w3"></div>
+                    <div class="wave w4"></div>
+                    <div class="wave w5"></div>
+                    <div class="wave w6"></div>
+                    <div class="wave w7"></div>
+                    <div class="wave w8"></div>
+                    <div class="wave w9"></div>
+                    <div class="wave w10"></div>
+
+                </div>
+
+                <div class="voice-text">
+                    "Your voice tells a story..."
+                </div>
+
+                <div class="analysis-mini">
+
+                    <div>
+                        <span>Sentiment</span>
+                        <strong>Positive</strong>
+                    </div>
+
+                    <div>
+                        <span>Confidence</span>
+                        <strong>94%</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Analyzer -->
+    <section class="analyzer-section" id="analyzer">
+
+        <div class="section-heading">
+
+            <span>ANALYSIS STUDIO</span>
+
+            <h2>
+                Analyze Your
+                <span>Voice & Text</span>
+            </h2>
+
+            <p>
+                Speak naturally or enter text manually.
+                Our analyzer will provide instant insights.
+            </p>
+
+        </div>
+
+
+        <div class="analyzer-container">
+
+            <!-- Input -->
+            <div class="input-panel">
+
+                <div class="panel-title">
+
+                    <div>
+                        <span class="panel-icon">✎</span>
+
+                        <div>
+                            <h3>Your Input</h3>
+                            <p>Enter text or use your microphone</p>
+                        </div>
+                    </div>
+
+                    <span id="status" class="status">
+                        Ready
+                    </span>
+
+                </div>
+
+
+                <textarea
+                    id="textInput"
+                    placeholder="Type your message here or click the microphone and start speaking..."
+                    oninput="analyzeText()"
+                ></textarea>
+
+
+                <div class="controls">
+
+                    <button
+                        class="mic-btn"
+                        id="micButton"
+                        onclick="startVoiceRecognition()"
+                    >
+                        🎤
+                        <span>Start Voice</span>
+                    </button>
+
+                    <button
+                        class="clear-btn"
+                        onclick="clearText()"
+                    >
+                        🗑 Clear
+                    </button>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText()"
+                    >
+                        📋 Copy
+                    </button>
+
+                </div>
+
+
+                <div class="input-info">
+
+                    <span>
+                        Words: <strong id="wordCount">0</strong>
+                    </span>
+
+                    <span>
+                        Characters: <strong id="charCount">0</strong>
+                    </span>
+
+                    <span>
+                        Sentences: <strong id="sentenceCount">0</strong>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Results -->
+            <div class="result-panel">
+
+                <div class="result-header">
+                    <div>
+                        <span class="panel-icon">◈</span>
+
+                        <div>
+                            <h3>Analysis Results</h3>
+                            <p>Real-time communication insights</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Sentiment -->
+                <div class="sentiment-card">
+
+                    <div class="result-card-top">
+                        <span>Overall Sentiment</span>
+                        <span id="sentimentEmoji">😐</span>
+                    </div>
+
+                    <h2 id="sentiment">
+                        Neutral
+                    </h2>
+
+                    <div class="sentiment-bar">
+                        <div id="sentimentBar"></div>
+                    </div>
+
+                    <p id="sentimentDescription">
+                        Enter text to detect sentiment.
+                    </p>
+
+                </div>
+
+
+                <!-- Statistics -->
+                <div class="statistics">
+
+                    <div class="stat-card">
+                        <span class="stat-icon">📝</span>
+                        <strong id="wordsResult">0</strong>
+                        <small>Words</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-icon">🔤</span>
+                        <strong id="charactersResult">0</strong>
+                        <small>Characters</small>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-icon">💬</span>
+                        <strong id="sentencesResult">0</strong>
+                        <small>Sentences</small>
+                    </div>
+
+                </div>
+
+
+                <!-- Keywords -->
+                <div class="keywords-card">
+
+                    <div class="keywords-title">
+                        <span>🔑</span>
+                        <h3>Important Keywords</h3>
+                    </div>
+
+                    <div id="keywords" class="keyword-list">
+                        <span class="empty-keyword">
+                            Keywords will appear here
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features -->
+    <section class="features-section" id="features">
+
+        <div class="section-heading">
+
+            <span>POWERFUL FEATURES</span>
+
+            <h2>
+                Everything You Need for
+                <span>Smart Analysis</span>
+            </h2>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🎤</div>
+
+                <h3>Voice Recognition</h3>
+
+                <p>
+                    Convert spoken words into text using
+                    browser-based speech recognition technology.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">⚡</div>
+
+                <h3>Real-Time Analysis</h3>
+
+                <p>
+                    Analyze your communication instantly
+                    as you type or speak.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">😊</div>
+
+                <h3>Sentiment Detection</h3>
+
+                <p>
+                    Identify whether your message expresses
+                    positive, negative, or neutral emotions.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🔑</div>
+
+                <h3>Keyword Extraction</h3>
+
+                <p>
+                    Automatically identify the most meaningful
+                    words from your communication.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about-section" id="about">
+
+        <div class="about-content">
+
+            <span>ABOUT THE SYSTEM</span>
+
+            <h2>
+                Turning Communication
+                Into <span>Useful Insights</span>
+            </h2>
+
+            <p>
+                The Real-Time Voice and Text Analysis System is a
+                modern web application designed to analyze human
+                communication. It combines voice recognition,
+                text processing, sentiment analysis, keyword
+                extraction, and real-time statistics in one
+                easy-to-use interface.
+            </p>
+
+            <p>
+                The system can be useful for education,
+                customer feedback, interviews, surveys,
+                communication analysis, and many other
+                applications.
+            </p>
+
+        </div>
+
+        <div class="about-box">
+
+            <div class="about-circle">
+                <span>AI</span>
+            </div>
+
+            <h3>Smart Communication</h3>
+
+            <p>
+                Speak. Analyze. Understand.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer-logo">
+            Voice<span>Text</span> AI
+        </div>
+
+        <p>
+            Real-Time Voice & Text Analysis System
+        </p>
+
+        <div class="footer-line"></div>
+
+        <p class="copyright">
+            © 2026 VoiceText AI. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
